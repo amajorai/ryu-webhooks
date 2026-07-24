@@ -1,0 +1,33 @@
+{
+	"name": "@ryu/webhooks-app",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"description": "The Ryu Webhooks app: the inbound webhook endpoint registry (resolved public URLs, secret presence, last-delivery + the ingress backend banner) shipped as a full-page Companion (Path B, ui_format:\"html\"). Read-only view over Core's /api/webhooks + /api/webhook-ingress/status through the webhooks:crud bridge capability; built to one self-contained HTML via vite-plugin-singlefile. Consumes @ryu/ui components (tree-shaken into the single-file bundle).",
+	"scripts": {
+		"build": "vite build",
+		"check-types": "tsc --noEmit",
+		"test": "bun test"
+	},
+	"dependencies": {
+		"@base-ui/react": "^1.5.0",
+		"@hugeicons/core-free-icons": "^4.0.0",
+		"@hugeicons/react": "^1.1.6",
+		"@ryu/ui": "workspace:*",
+		"class-variance-authority": "^0.7.1",
+		"date-fns": "^4.1.0",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0"
+	},
+	"devDependencies": {
+		"@ryu/config": "workspace:*",
+		"@tailwindcss/postcss": "^4.2.1",
+		"@types/react": "^19.2.10",
+		"@types/react-dom": "^19.2.0",
+		"@vitejs/plugin-react": "^5.2.0",
+		"tailwindcss": "^4",
+		"typescript": "^5",
+		"vite": "^6",
+		"vite-plugin-singlefile": "^2.3.0"
+	}
+}
