@@ -1,0 +1,68 @@
+<!doctype html>
+<!--
+  Dev-only browser proof harness for the Webhooks companion. It mounts the real
+  React entrypoint with a local host bridge so the protected secret editor can be
+  exercised without starting a full Core node. The production manifest ships
+  only dist/index.html.
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Webhooks secret proof</title>
+	</head>
+	<body>
+		<div id="ryu-plugin-root"></div>
+		<script>
+		"use strict";
+		const endpoint = {
+			hasSecret: true,
+			id: "composio",
+			kind: "composio",
+			label: "Composio triggers",
+			lastDelivery: null,
+			path: "/api/composio/webhook",
+			publicUrl: "https://relay.example/api/composio/webhook",
+			subscriptionCount: 2,
+			workflowId: null,
+			workflowName: null,
+		};
+		const proofState = {
+			calls: [],
+			secret: "proof-secret-value-1234567890",
+		};
+		window.__webhookProof = proofState;
+		window.ryu = {
+			context: null,
+			webhooks: {
+				list: async () => {
+					proofState.calls.push("list");
+					return {
+						endpoints: [endpoint],
+						ingressKind: "ryu-relay",
+						publicBaseUrl: null,
+						up: true,
+					};
+				},
+				ingressStatus: async () => ({
+					kind: "ryu-relay",
+					publicUrl: "https://relay.example",
+					up: true,
+				}),
+				getSecret: async () => {
+					proofState.calls.push("getSecret");
+					return { secret: proofState.secret };
+				},
+				setSecret: async (input) => {
+					proofState.calls.push(input.secret ? "setSecret" : "generateSecret");
+					proofState.secret =
+						input.secret ??
+						`${crypto.randomUUID().replaceAll("-", "")}${crypto.randomUUID().replaceAll("-", "")}`;
+					return { secret: proofState.secret };
+				},
+			},
+		};
+		</script>
+		<script type="module" src="/src/main.tsx"></script>
+	</body>
+</html>
