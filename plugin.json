@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ryu.webhooks",
+  "version": "0.1.14",
+  "description": "Inbound webhook endpoint registry: resolved public URLs, signing-secret configuration, last-delivery times, and the ingress backend status.",
+  "author": {
+    "name": "Ryu",
+    "url": "https://ryuhq.com"
+  },
+  "homepage": "https://github.com/amajorai/ryu-webhooks",
+  "repository": "https://github.com/amajorai/ryu-webhooks",
+  "keywords": ["webhooks", "integrations", "ingress", "automation"],
+  "extensions": {
+    "com.ryuhq.ryu": {
+      "id": "@ryu/webhooks",
+      "displayName": "Webhooks"
+    }
+  }
+}
