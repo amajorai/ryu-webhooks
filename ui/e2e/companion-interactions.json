@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "package": "webhooks",
+  "scope": "complete",
+  "expectedRows": 9,
+  "selector": {
+    "spec": "e2e/webhooks-companion.spec.ts",
+    "config": "e2e/webhooks-companion.playwright.config.ts"
+  },
+  "evidenceBoundary": "The built Webhooks single-file app runs in a real sandboxed ExtensionHost with manifest-derived webhooks:crud and ui:toast grants. HostServices callbacks are deterministic local fixtures that record exact RPC inputs, enforce Core's 16–512 character custom-secret validation, and persist the simulated Core secret in session storage across reload. Clipboard access is exercised in Chromium with explicit test-context permission. This does not prove a live Core node, an external webhook sender, or a real ingress backend.",
+  "assertions": [
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "113",
+        "component": "CopyUrlButton",
+        "tag": "Button",
+        "events": "onClick"
+      },
+      "testTitle": "the registry exposes resolved public URLs and copies the exact endpoint or ingress URL",
+      "assertionName": "A reachable public URL is copied from the button's browser clipboard action.",
+      "assertionMarker": "https://node.example.test"
+    },
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "139",
+        "component": "PublicUrlRow",
+        "tag": "CopyUrlButton",
+        "events": ""
+      },
+      "testTitle": "the registry exposes resolved public URLs and copies the exact endpoint or ingress URL",
+      "assertionName": "An endpoint's resolved URL is copied exactly; a missing workflow URL is not fabricated.",
+      "assertionMarker": "https://node.example.test/api/composio/webhook"
+    },
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "261",
+        "component": "SecretEditor",
+        "tag": "Input",
+        "events": "onChange"
+      },
+      "testTitle": "secret editing validates through Core, saves, rotates, copies, and reads back after reload",
+      "assertionName": "Editing the secret preserves a rejected value for correction, then sends the trimmed custom value to the host.",
+      "assertionMarker": "custom-order-signing-secret-2026"
+    },
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "275",
+        "component": "SecretEditor",
+        "tag": "Button",
+        "events": "onClick"
+      },
+      "testTitle": "secret editing validates through Core, saves, rotates, copies, and reads back after reload",
+      "assertionName": "The protected workflow secret can be copied after a server-side rotation.",
+      "assertionMarker": "Copy signing secret"
+    },
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "289",
+        "component": "SecretEditor",
+        "tag": "Button",
+        "events": "onClick"
+      },
+      "testTitle": "secret editing validates through Core, saves, rotates, copies, and reads back after reload",
+      "assertionName": "Generate requests a host-minted secret without submitting a client-supplied value.",
+      "assertionMarker": "New webhook secret generated"
+    },
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "298",
+        "component": "SecretEditor",
+        "tag": "Button",
+        "events": "onClick"
+      },
+      "testTitle": "secret editing validates through Core, saves, rotates, copies, and reads back after reload",
+      "assertionName": "Save sends the exact custom secret and renders the success result after the host accepts it.",
+      "assertionMarker": "Webhook secret saved"
+    },
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "414",
+        "component": "Webhooks",
+        "tag": "Button",
+        "events": "onClick"
+      },
+      "testTitle": "refresh and retry recover the registry and render the newly returned state",
+      "assertionName": "Refresh fetches the registry and ingress status again and displays the updated endpoint label.",
+      "assertionMarker": "Order webhook refreshed"
+    },
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "447",
+        "component": "Webhooks",
+        "tag": "CopyUrlButton",
+        "events": ""
+      },
+      "testTitle": "the registry exposes resolved public URLs and copies the exact endpoint or ingress URL",
+      "assertionName": "The ingress banner copy action returns the server-provided ingress origin.",
+      "assertionMarker": "https://node.example.test"
+    },
+    {
+      "row": {
+        "package": "webhooks",
+        "source_file": "apps-store/webhooks/ui/src/Webhooks.tsx",
+        "line": "475",
+        "component": "Webhooks",
+        "tag": "Button",
+        "events": "onClick"
+      },
+      "testTitle": "refresh and retry recover the registry and render the newly returned state",
+      "assertionName": "Retry clears a registry error by issuing fresh host requests and rendering the returned endpoints.",
+      "assertionMarker": "Retry"
+    }
+  ]
+}
