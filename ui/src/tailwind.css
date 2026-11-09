@@ -1,0 +1,26 @@
+/* webhooks companion Tailwind entry. Ryu semantic tokens, base styles, and live-theme defaults come from @ryu/ui/companion-theme.css; this file owns only the app's @source list and domain utilities. */
+@import "tailwindcss";
+@import "@ryu/ui/app-ui.css";
+@source "./";
+@source "../../../../packages/ui/src/components/badge.tsx";
+@source "../../../../packages/ui/src/components/button.tsx";
+@source "../../../../packages/ui/src/components/empty.tsx";
+@source "../../../../packages/ui/src/components/input.tsx";
+@source "../../../../packages/ui/src/components/label.tsx";
+@source "../../../../packages/ui/src/components/spinner.tsx";
+
+[data-secret-field] input {
+	filter: blur(5px);
+	transition: filter 150ms ease;
+}
+
+[data-secret-field] input:focus-visible,
+[data-secret-field] input:hover {
+	filter: blur(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[data-secret-field] input {
+		transition: none;
+	}
+}
